@@ -1,23 +1,19 @@
-import logo from './logo.svg';
+import React from 'react'
+import {Routes, Route} from 'react-router-dom'
+
 import './App.css';
+import ErrorBoundary from './components/error-boundry/error-boundry.component'
+import HomePage from './pages/homepage.component'
 
 function App() {
+  debugger
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <ErrorBoundary>
+        <Routes>
+          <Route exact path='/' element={<HomePage/>}></Route>
+        </Routes>
+      </ErrorBoundary>
     </div>
   );
 }
