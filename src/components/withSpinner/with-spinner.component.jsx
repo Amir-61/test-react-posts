@@ -1,14 +1,23 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { postsIsFetchingSelection } from '../../redux/posts/post.selectors';
 
-import React from 'react'
+import './with-spinner.styles.scss';
 
-import './with-spinner.styles.scss'
+const Spinner = ({ WrappedComponent, ...otherProps }) => {
+  const isLoading = useSelector(postsIsFetchingSelection);
 
-const WithSpinner = (WrappedComponent) => ({isLoading, ...otherProps})=> {
   return isLoading ? (
     <div className='SpinnerOverlay'>
       <div className='SpinnerContainer' />
     </div>
-    ): (<WrappedComponent {...otherProps} />)
-}
+  ) : (
+    <WrappedComponent {...otherProps} />
+  );
+};
+
+const WithSpinner = (WrappedComponent) => {
+  return (props) => <Spinner WrappedComponent={WrappedComponent} {...props} />;
+};
 
 export default WithSpinner;

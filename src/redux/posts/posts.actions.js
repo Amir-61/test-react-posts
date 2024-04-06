@@ -18,17 +18,17 @@ export const fetchPostsFailure = (errorObj) => ({
 export const fetchPostsStartAsync = () => {
   return dispatch => {
     dispatch(fetchPostStart())
+    setTimeout(()=>{
       fetch("https://jsonplaceholder.typicode.com/posts")
       .then(res => res.json())
       .then(
         (result) => {
-          setTimeout(()=>{
             dispatch(fetchPostsSuccess(result))
-          }, 5000)
-          
         },
         (error) => {
           dispatch(fetchPostsFailure(error))
         }
-    )
+      )
+    }, 3000)
+
 }}
